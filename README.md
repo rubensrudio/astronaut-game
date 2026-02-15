@@ -1,4 +1,4 @@
-# Mario Game - Canvas Platform Game
+# Astronaut Game - Canvas Platform Game
 
 A classic 2D platform game inspired by Mario Bros and Sonic, built with HTML5 Canvas, JavaScript, and Webpack.
 
