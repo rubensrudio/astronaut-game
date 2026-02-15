@@ -24,6 +24,15 @@ class Player {
         }
         this.width = 66
         this.height = 150
+        
+        // Ground detection
+        this.isGrounded = false
+        this.coyoteTime = 0
+        this.coyoteTimeMax = 6 // frames of coyote time
+        
+        // Jump properties
+        this.jumpForce = 25
+        this.canJump = true
 
         this.image = Util.createImage(spriteStandRight)
         this.frames = 0
@@ -50,6 +59,16 @@ class Player {
       //177 é a divisão de width pela quantidade de bonecos, 400 é height da imagem
       c.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 400, this.position.x, this.position.y, this.width, this.height)
     }
+    
+    jump() {
+        // Can only jump if grounded or within coyote time
+        if (this.isGrounded || this.coyoteTime > 0) {
+            this.velocity.y = -this.jumpForce
+            this.isGrounded = false
+            this.coyoteTime = 0
+            this.canJump = false
+        }
+    }
 
     update() {
         this.frames++
@@ -58,12 +77,25 @@ class Player {
           this.frames = 0
         else if(this.frames > 29 && (this.currentSprite === this.sprites.run.right || this.currentSprite === this.sprites.run.left))
           this.frames = 0
+        
         this.draw()
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
-        if (this.position.y + this.height + this.velocity.y <= canvas.height)
+        // Apply gravity
+        if (this.position.y + this.height + this.velocity.y <= canvas.height) {
             this.velocity.y += gravity
+        }
+        
+        // Update coyote time
+        if (!this.isGrounded && this.coyoteTime > 0) {
+            this.coyoteTime--
+        }
+        
+        // Reset jump when grounded
+        if (this.isGrounded) {
+            this.canJump = true
+        }
     }
 }
 

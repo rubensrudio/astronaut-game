@@ -90,17 +90,13 @@ mario-game-server/
 
 - Game requires Node.js v25+ or configure with `--openssl-legacy-provider` for older Node versions
 
-## 📝 License
-
-ISC
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
 ## 👨‍💻 Author
 
-Your Name
+Rubens Rudio
 
 ---
 
